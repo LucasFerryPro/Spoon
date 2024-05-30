@@ -1,6 +1,7 @@
 package spoon.Core;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -11,13 +12,15 @@ public class Game {
     private boolean fullscreen;
     private boolean resizable;
     private int idCurrentScene;
+    private JFrame window;
+    private GamePanel gamePanel;
 
     public Game() {
-        this("Untitled Game", null, 800, 600, false, true, 0);
+        this("Untitled Game", new ArrayList<>(), 800, 600, false, true, 0);
     }
 
     public Game(String name) {
-        this(name, null, 800, 600, false, true, 0);
+        this(name, new ArrayList<>(), 800, 600, false, true, 0);
     }
 
     public Game(String name, List<Scene> scenes) {
@@ -32,18 +35,38 @@ public class Game {
         this.fullscreen = fullscreen;
         this.resizable = resizable;
         this.idCurrentScene = idCurrentScene;
-
-        this.run();
     }
 
-    public void run(){
-        JFrame window = new JFrame(this.name);
+    private void Update() {
+        while(true) {
+            render();
+        }
+    }
+
+    private void render() {
+        if (gamePanel != null) {
+            gamePanel.repaint();
+        }
+    }
+
+    public void run() {
+        window = new JFrame(this.name);
         window.setSize(this.windowWidth, this.windowHeight);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
-        if(this.fullscreen) window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        if (this.fullscreen) window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(resizable);
+
+        if (scenes != null && !scenes.isEmpty()) {
+            Scene currentScene = scenes.get(idCurrentScene);
+            System.out.println(currentScene.getGameObjects().size());
+            gamePanel = new GamePanel(currentScene);
+            window.add(gamePanel);
+        }
+
         window.setVisible(true);
+
+        if (scenes != null && !scenes.isEmpty()) Update();
     }
 
     // Getters and setters
@@ -63,7 +86,7 @@ public class Game {
         this.scenes = scenes;
     }
 
-    public void addScene(Scene scene){
+    public void addScene(Scene scene) {
         this.scenes.add(scene);
     }
 
@@ -107,4 +130,3 @@ public class Game {
         this.idCurrentScene = idFirstScene;
     }
 }
-
