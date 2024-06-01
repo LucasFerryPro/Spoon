@@ -1,20 +1,29 @@
 package spoon.Entities;
 
-import spoon.Entities.Component.Model;
-import spoon.Entities.Component.View;
+import spoon.Entities.Component.DefaultModel;
+import spoon.Entities.Component.DefaultView;
 
 import java.awt.*;
 
-public class GameObject {
-    public View view;
-    public Model model;
+public abstract class GameObject{
+    public DefaultView defaultView;
+    public DefaultModel defaultModel;
 
-    public GameObject(View view, Model model) {
-        this.view = view;
-        this.model = model;
+    public GameObject(DefaultView defaultView, DefaultModel defaultModel) {
+        this.defaultView = defaultView;
+        this.defaultModel = defaultModel;
+        defaultView.resizeImage(
+                defaultModel.getTransform().getScale().getSizeW(),
+                defaultModel.getTransform().getScale().getSizeH());
     }
 
     public void render(Graphics g) {
-        view.render(g, model.getX(), model.getY());
+        defaultView.render(g,
+                defaultModel.getTransform().getPosition().getX(),
+                defaultModel.getTransform().getPosition().getY());
     }
+
+    public abstract void Start();
+
+    public abstract void Update();
 }

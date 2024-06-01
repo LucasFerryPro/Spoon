@@ -8,13 +8,23 @@ import java.util.List;
 
 public class Scene {
     private List<GameObject> gameObjects;
+    private Color background;
 
     public Scene(){
-        this(new ArrayList<>());
+        this(new ArrayList<>(), Color.white);
     }
 
-    public Scene(List<GameObject> gameObjects) {
+    public Scene(List<GameObject> gameObjects){
+        this(gameObjects, Color.white);
+    }
+
+    public Scene(Color background){
+        this(new ArrayList<>(), background);
+    }
+
+    public Scene(List<GameObject> gameObjects, Color background) {
         this.gameObjects = gameObjects;
+        this.background = background;
     }
 
     public List<GameObject> getGameObjects(){
@@ -27,6 +37,14 @@ public class Scene {
 
     public void addGameObject(GameObject gameObject){
         this.gameObjects.add(gameObject);
+    }
+
+    public Color getBackground() {
+        return this.background;
+    }
+
+    public void setBackground(Color background){
+        this.background = background;
     }
 
     public void render(Graphics g) {

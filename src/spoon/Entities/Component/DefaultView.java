@@ -5,40 +5,24 @@ import java.awt.*;
 
 import static spoon.Entities.Component.Pivot.*;
 
-public class View {
+public class DefaultView {
 
     private Image image;
-    private double sizeW;
-    private double sizeH;
     private Pivot pivot;
 
-    public View(String imagePath) {
-        this(imagePath,TOP_RIGHT, 1, 1);
+    public DefaultView(String imagePath) {
+        this(imagePath, TOP_RIGHT);
     }
 
-    public View(String imagePath, Pivot pivot) {
-        this(imagePath, pivot, 1, 1);
-    }
-
-    public View(String imagePath, double sizeW, double sizeH) {
-        this(imagePath, TOP_RIGHT, 1, 1);
-    }
-
-    public View(String imagePath, Pivot pivot, double sizeW, double sizeH) {
-        this.sizeW = sizeW;
-        this.sizeH = sizeH;
+    public DefaultView(String imagePath, Pivot pivot) {
         this.pivot = pivot;
         ImageIcon icon = new ImageIcon("public\\" + imagePath);
-        int originalWidth = icon.getIconWidth();
-        int originalHeight = icon.getIconHeight();
-        int newWidth = (int) (originalWidth * sizeW);
-        int newHeight = (int) (originalHeight * sizeH);
-        this.image = icon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        this.image = icon.getImage();
     }
 
-    public void resizeImage(){
-        int originalWidth = image.getWidth(null);
-        int originalHeight = image.getHeight(null);
+    public void resizeImage(double sizeW, double sizeH){
+        int originalWidth = this.image.getWidth(null);
+        int originalHeight = this.image.getHeight(null);
         int newWidth = (int) (originalWidth * sizeW);
         int newHeight = (int) (originalHeight * sizeH);
         this.image = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
@@ -91,21 +75,5 @@ public class View {
 
     public void setPivot(Pivot pivot){
         this.pivot = pivot;
-    }
-
-    public double getSizeW() {
-        return sizeW;
-    }
-
-    public void setSizeW(double sizeW) {
-        this.sizeW = sizeW;
-    }
-
-    public double getSizeH() {
-        return sizeH;
-    }
-
-    public void setSizeH(double sizeH) {
-        this.sizeH = sizeH;
     }
 }
