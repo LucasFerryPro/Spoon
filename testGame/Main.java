@@ -1,10 +1,3 @@
-import Builders.CircleModelBuilder;
-import Controllers.Circle;
-import Models.CircleModel;
-import Views.CircleView;
-import spoon.Builders.GameBuilder;
-import spoon.Builders.SceneBuilder;
-import spoon.Builders.TransformBuilder;
 import spoon.Core.Game;
 import spoon.Core.Scene;
 import spoon.Entities.Component.*;
@@ -13,30 +6,38 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        Circle circle = new Circle(
-                new CircleView(Pivot.BOTTOM_CENTER),
-                (CircleModel) new CircleModelBuilder()
-                        .setHp(200)
-                        .setTransform(new TransformBuilder()
-                                .setPosition(new Position(300, 500))
-                                .setScale(new Scale(0.5))
-                                .createTransform()
-                        )
-                        .createModel()
+
+        Circle circle1 = new Circle(
+                new CircleView(Pivot.CENTER),
+                new CircleModel(
+                    new Transform(
+                            new Position(400,300),
+                            new Scale(0.5)
+                    )
+                )
         );
 
+        Circle circle2 = new Circle(
+                new CircleView(Pivot.CENTER),
+                new CircleModel(
+                        new Transform(
+                                new Position(200,300),
+                                new Scale(0.2)
+                        ),
+                        200
+                )
+        );
 
-        Scene firstScene = new SceneBuilder()
-                .setBackground(Color.LIGHT_GRAY)
-                .addGameObject(circle)
-                .createScene();
+        System.out.println(((CircleModel)circle1.model).getHp());
+        System.out.println(((CircleModel)circle2.model).getHp());
 
-        Game testGame = new GameBuilder()
-                .setName("test")
-                .setResizable(false)
-                .addScene(firstScene)
-                .createGame();
+        Scene firstScene = new Scene(Color.LIGHT_GRAY);
+        firstScene.addGameObject(circle1);
+        firstScene.addGameObject(circle2);
 
-        testGame.run();
+        Game TestGame = new Game("test");
+        TestGame.addScene(firstScene);
+
+        TestGame.run();
     }
 }

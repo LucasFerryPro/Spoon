@@ -6,21 +6,21 @@ import spoon.Entities.Component.DefaultView;
 import java.awt.*;
 
 public abstract class GameObject{
-    public DefaultView defaultView;
-    public DefaultModel defaultModel;
+    public DefaultView view;
+    public DefaultModel model;
 
-    public GameObject(DefaultView defaultView, DefaultModel defaultModel) {
-        this.defaultView = defaultView;
-        this.defaultModel = defaultModel;
-        defaultView.resizeImage(
-                defaultModel.getTransform().getScale().getSizeW(),
-                defaultModel.getTransform().getScale().getSizeH());
+    public GameObject(DefaultView view, DefaultModel model) {
+        this.view = view;
+        this.model = model;
+        view.resizeImage(
+                model.getTransform().getScale().getSizeW(),
+                model.getTransform().getScale().getSizeH());
     }
 
     public void render(Graphics g) {
-        defaultView.render(g,
-                defaultModel.getTransform().getPosition().getX(),
-                defaultModel.getTransform().getPosition().getY());
+        view.render(g,
+                model.getTransform().getPosition().getX(),
+                model.getTransform().getPosition().getY());
     }
 
     public abstract void Start();
