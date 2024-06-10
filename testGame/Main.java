@@ -1,10 +1,3 @@
-import Builders.CircleModelBuilder;
-import Controllers.Circle;
-import Models.CircleModel;
-import Views.CircleView;
-import spoon.Builders.GameBuilder;
-import spoon.Builders.SceneBuilder;
-import spoon.Builders.TransformBuilder;
 import spoon.Core.Game;
 import spoon.Core.Scene;
 import spoon.Entities.Component.*;
