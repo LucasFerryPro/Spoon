@@ -10,18 +10,6 @@ public class Scene {
     private List<GameObject> gameObjects;
     private Color background;
 
-    public Scene(){
-        this(new ArrayList<>(), Color.white);
-    }
-
-    public Scene(List<GameObject> gameObjects){
-        this(gameObjects, Color.white);
-    }
-
-    public Scene(Color background){
-        this(new ArrayList<>(), background);
-    }
-
     public Scene(List<GameObject> gameObjects, Color background) {
         this.gameObjects = gameObjects;
         this.background = background;
