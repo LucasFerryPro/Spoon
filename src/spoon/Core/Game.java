@@ -15,18 +15,6 @@ public class Game {
     private JFrame window;
     private GamePanel gamePanel;
 
-    public Game() {
-        this("Untitled Game", new ArrayList<>(), 800, 600, false, true, 0);
-    }
-
-    public Game(String name) {
-        this(name, new ArrayList<>(), 800, 600, false, true, 0);
-    }
-
-    public Game(String name, List<Scene> scenes) {
-        this(name, scenes, 800, 600, false, true, 0);
-    }
-
     public Game(String name, List<Scene> scenes, int windowWidth, int windowHeight, boolean fullscreen, boolean resizable, int idCurrentScene) {
         this.name = name;
         this.scenes = scenes;
@@ -74,59 +62,27 @@ public class Game {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Scene> getScenes() {
         return scenes;
-    }
-
-    public void setScenes(List<Scene> scenes) {
-        this.scenes = scenes;
-    }
-
-    public void addScene(Scene scene) {
-        this.scenes.add(scene);
     }
 
     public int getWindowWidth() {
         return windowWidth;
     }
 
-    public void setWindowWidth(int windowWidth) {
-        this.windowWidth = windowWidth;
-    }
-
     public int getWindowHeight() {
         return windowHeight;
-    }
-
-    public void setWindowHeight(int windowHeight) {
-        this.windowHeight = windowHeight;
     }
 
     public boolean isFullscreen() {
         return fullscreen;
     }
 
-    public void setFullscreen(boolean fullscreen) {
-        this.fullscreen = fullscreen;
-    }
-
     public boolean isResizable() {
         return resizable;
     }
 
-    public void setResizable(boolean resizable) {
-        this.resizable = resizable;
-    }
-
     public int getIdFirstScene() {
         return idCurrentScene;
-    }
-
-    public void setIdFirstScene(int idFirstScene) {
-        this.idCurrentScene = idFirstScene;
     }
 }
