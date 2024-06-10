@@ -13,6 +13,7 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
+      
         Circle circle = new Circle(
                 new CircleView(Pivot.BOTTOM_CENTER),
                 (CircleModel) new CircleModelBuilder()
@@ -24,7 +25,6 @@ public class Main {
                         )
                         .createModel()
         );
-
 
         Scene firstScene = new SceneBuilder()
                 .setBackground(Color.LIGHT_GRAY)
